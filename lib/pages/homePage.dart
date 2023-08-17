@@ -10,7 +10,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Widget> bodies = [
-    const settingBody(),
+
+    const homeBody(),
     const homeBody(),
     const rankingBody(),
   ];
@@ -21,13 +22,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading:  TextButton(
-              onPressed: () {},
-              child: Text(
-                "أدعية",
-                style: TextStyle(color: Theme.of(context).disabledColor),
-              )),
-          title: const Text("أذكار"),
+
+          title: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: const Text("أذكار"),
+          ),
 
         ),
         body: bodies[NavItem],
@@ -42,7 +41,10 @@ class _HomePageState extends State<HomePage> {
           },
           items: const [
              BottomNavigationBarItem(
-                icon: Icon(Icons.settings_rounded), label: "الإعدادات "),
+                icon: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text("أدعية", style: TextStyle(fontSize: 16)),/*TODO the color of it dont change */
+                ), label: "ادعية "),
              BottomNavigationBarItem(
                 icon: Icon(Icons.home_rounded), label: "الصفحة الرئيسية"),
              BottomNavigationBarItem(

@@ -4,7 +4,7 @@ import '../azkar_lists.dart';
 
 class azkarPage extends StatelessWidget {
   final String name;
-  azkarPage(this.name);
+  const azkarPage(this.name, {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +13,7 @@ class azkarPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios_rounded)),
+              icon: const Icon(Icons.arrow_back_ios_rounded)),
           title: Text(name),
 
 
@@ -36,11 +36,11 @@ class azkarPage extends StatelessWidget {
      child: Row(
        mainAxisAlignment: MainAxisAlignment.center,
        children: [
-         IconButton(onPressed: (){},icon: Icon(Icons.skip_next)),
-         SizedBox(width: 50,),
-         IconButton(onPressed: (){},icon: Icon(Icons.play_arrow)),
-         SizedBox(width: 50,),
-           IconButton(onPressed: (){},icon: Icon(Icons.skip_previous)),
+         IconButton(onPressed: (){},icon: const Icon(Icons.skip_next)),
+         const SizedBox(width: 50,),
+         IconButton(onPressed: (){},icon: const Icon(Icons.play_arrow)),
+         const SizedBox(width: 50,),
+           IconButton(onPressed: (){},icon: const Icon(Icons.skip_previous)),
                 ],
      ),
    ),

@@ -17,10 +17,10 @@ class homeBody extends StatelessWidget {
               width: double.infinity,
               child: ClickTitle(
                 text: name,
+
                 function: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Directionality(child:  azkarPage(name),textDirection: TextDirection.rtl,)
-                       ;
+                    return Directionality(textDirection: TextDirection.rtl,child:   azkarPage(name),);
                   }));
                 },
               ));

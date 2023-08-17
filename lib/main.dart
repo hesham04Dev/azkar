@@ -3,28 +3,44 @@ import 'package:flutter/material.dart';
 import 'pages/homePage.dart';
 
 void main() {
+  //TODO adding the db if still i need to add ranking page
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
       theme: ThemeData(
+        useMaterial3: true,
+        fontFamily: "Amiri",
+        scaffoldBackgroundColor: Colors.white,
 
-          primarySwatch: Colors.lightGreen,
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.lightGreen),
+
+         // primarySwatch: Colors.lightGreen,
           appBarTheme: const AppBarTheme(
+            color: Colors.lightGreen,
+              //elevation: 0.5 ,
               centerTitle: true,
-              shape: ContinuousRectangleBorder(
+             /*shape: ContinuousRectangleBorder(
                 borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(200)),
-              )),
+                    BorderRadius.vertical(bottom: Radius.circular(200)
+                    ),
 
+              )*/
+
+          ),
+
+      ),
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
       ),
       home: Directionality(
         textDirection: TextDirection.rtl,

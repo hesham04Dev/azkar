@@ -11,7 +11,7 @@ ClickTitle({
   @override
   Widget build(BuildContext context) {
     return TextButton(onPressed: function, child: Text(text, style: TextStyle(
-      fontWeight: FontWeight.bold,fontSize: 20,color: Theme.of(context).primaryColorDark
+      fontWeight: FontWeight.bold,fontSize: 25,color: Theme.of(context).primaryColor
     ),));
   }
 }
