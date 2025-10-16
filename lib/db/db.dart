@@ -134,10 +134,10 @@ LazyDatabase _openConnection() {
     final dbFile = File(p.join(dir.path, 'hcody_ab.db'));
     print(dbFile.path);
     // Copy DB from assets if it doesn't exist
-    dbFile.delete();
+    await dbFile.delete();
     if (!await dbFile.exists()) {
       // print("dddddddddd");
-      final data = await rootBundle.load('assets/al_azkar_db9.db');
+      final data = await rootBundle.load('assets/al_azkar_db11.db');
       final bytes = data.buffer.asUint8List();
       await dbFile.writeAsBytes(bytes);
       print(dbFile.path);
@@ -277,7 +277,9 @@ class AzkarDao extends DatabaseAccessor<AppDatabase> with _$AzkarDaoMixin {
       ..where(db.zkrTimes.zkrCategoryId.equals(id))
       ..orderBy([
         OrderingTerm(expression: db.zkrTimes.rank, mode: OrderingMode.asc),
-      ])).get();
+      ]
+      )
+    ).get();
 
     return query.map((row) {
       final zkr = row.readTable(db.zkrs);

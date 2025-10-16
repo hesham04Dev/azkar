@@ -1,4 +1,9 @@
 
+import 'package:audio_service/audio_service.dart';
+import 'package:new_azkar/handlers/audio_handler.dart';
+import 'package:new_azkar/pages/zkrPage/providers/zkr_provider.dart';
+import 'package:new_azkar/rootProvider/audio_provider.dart';
+
 import '/pages/homePage/Bodies/providers/pageIndexProvider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +21,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppDatabase.init();
   SettingsController.appVersion = (await PackageInfo.fromPlatform()).version;
+  // final audioHandler = await AudioService.init(
+  //   builder: () => MyAudioHandler(),
+  //   config: const AudioServiceConfig(
+  //     androidNotificationChannelId: 'com.example.new_azkar.channel.audio',
+  //     androidNotificationChannelName: 'Azkar Audio',
+  //     androidStopForegroundOnPause: true,
+  //   ),
+  // );
+  AudioProvider.handler = await AudioService.init(
+    builder: () => MyAudioHandler(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'com.example.app.audio',
+      androidNotificationChannelName: 'Audio Playback',
+      androidStopForegroundOnPause: false,
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -31,7 +52,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => PageIndexProvider(),
           ),
-          
+          ChangeNotifierProvider(
+            create: (context) => ZkrProvider(),
+          ),
         ],
         child: Builder(builder: (context) {
           bool isDarkMode = context.watch<ThemeProvider>().DarkMode;

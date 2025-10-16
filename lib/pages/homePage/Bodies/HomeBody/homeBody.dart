@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_azkar/db/db.dart';
+import 'package:provider/provider.dart';
+import '../../../zkrPage/providers/zkr_provider.dart';
 import '../../../zkrPage/zkrPage.dart' show ZkrPage;
 import '/config/const.dart';
 import '/models/PrimaryContainer.dart';
@@ -48,7 +50,8 @@ class _HomeBodyState extends State<HomeBody> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async{
+                    await context.read<ZkrProvider>().init(category.id);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
