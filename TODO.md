@@ -5,7 +5,7 @@
 - [x] when closes return to the first
 - [x] check the naming of the mp3
 - [x] split the second voice
-- [ ] compress voices
+- [x] compress voices
 - [-] search for missing voices (try ai in generate what we cant find them)
 - [x] fix the android not building problem
 - [ ] add share btn
@@ -21,14 +21,15 @@
 - [x] fix the rtl 
 - [x] fix the ranks
 - [x] fix the aya in estiqath (make it like the others (with aya number))
-- [ ] fix the lating in the time
-- [ ] disable the skip btn on last trak
+- [x] fix the lating in the time
+- removed [ ] disable the skip btn on last trak
+- [x] make the last skip return to the first track
 
 - [x] fix auto scroll
 - [x] fix decrement in number
 - removed [ ] add scroll in number clicking 
 - removed [ ] and add option to disable it in settings or something
-- [ ] fix when paused and the app opend
+- [x] fix when paused out side the app then  the app opend
 
 ## ideas
 - [ ] Sharing 
@@ -36,7 +37,7 @@
 - [ ] Multi lang (base idea)
   - show azkars in en,and other langs 
   - in settings add toggle for always show description  
-- [-] audio (base idea)
+- [x] audio (base idea)
   - should every zkr have an audio for it that is essintail for non ar speaker
 
 

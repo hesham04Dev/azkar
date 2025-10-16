@@ -1,6 +1,3 @@
-import 'package:audio_service/audio_service.dart';
-// import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 
 import '../handlers/audio_handler.dart';
@@ -103,7 +100,15 @@ class AudioProvider with ChangeNotifier {
   // should be inited in the main
   static late MyAudioHandler  handler;
   var context;
+  bool isExpanded = false;
+  var animationController;
 
+
+  // AudioProvider(){
+  //   handler.playbackState.listen((state) {
+  //     playing.value = state.playing;
+  //   });
+  // }
   // int _index = 0;
   // int _repeatCount = 1;
   // bool _isPlaying = false;
@@ -116,6 +121,12 @@ class AudioProvider with ChangeNotifier {
   AudioProvider({required this.tracks, required this.context}) {
     handler.context = context;
     handler.setPlaylist(tracks);
+    handler.playbackState.listen((state) {
+          if(state.playing != isExpanded){
+            isExpanded = state.playing;
+            notifyListeners();
+          }
+        });
 
   }
 
@@ -130,12 +141,12 @@ class AudioProvider with ChangeNotifier {
 
   static stop(){
     handler.stop();
-
   }
 
   Future<void> toggle() async {
-
+    isExpanded = !isExpanded;
     if (isPlaying) {
+
       await handler.pause();
     } else {
       await handler.play();
@@ -147,6 +158,14 @@ class AudioProvider with ChangeNotifier {
     handler.skipToNext();
     notifyListeners();
   }
+
+// void toggleExpand() {
+//
+//     toggle();
+//     isExpanded = !isExpanded;
+//
+//
+// }
 
 
 }

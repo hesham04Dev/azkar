@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter/services.dart';
@@ -134,7 +135,7 @@ LazyDatabase _openConnection() {
     final dbFile = File(p.join(dir.path, 'hcody_ab.db'));
     print(dbFile.path);
     // Copy DB from assets if it doesn't exist
-    await dbFile.delete();
+    // await dbFile.delete();
     if (!await dbFile.exists()) {
       // print("dddddddddd");
       final data = await rootBundle.load('assets/al_azkar_db11.db');

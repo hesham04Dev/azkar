@@ -93,7 +93,6 @@
 // }
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:new_azkar/pages/zkrPage/providers/zkr_provider.dart';
 import 'package:provider/provider.dart';
@@ -124,14 +123,13 @@ class MyAudioHandler extends BaseAudioHandler
     final medias = tracks.map((audio) {
       final parts = audio["duration"].split(':').map(int.parse).toList();
       int hours = 0, minutes = 0, seconds = 0;
-
-
         hours = parts[0];
         minutes = parts[1];
         seconds = parts[2];
       return MediaItem(
         id: audio["path"],
         title: "Azkar",
+        artist: "Affasy",
         duration: Duration(hours: hours,minutes: minutes,seconds: seconds) ,
         artUri:  Uri.parse('https://hcody.com/storage/projects/01K6FDWET0ANS86A657K3MR7H7.jpg'),
       );
@@ -195,12 +193,14 @@ class MyAudioHandler extends BaseAudioHandler
   Future<void> skipToNext() async {
     if (currentIndex + 1 < _tracks.length) {
       currentIndex++;
-      await setSource();
-      await play();
+
     } else {
       // End of playlist
-      await stop();
+      // await stop();
+      currentIndex =0;
     }
+    await setSource();
+    await play();
   }
 
   @override

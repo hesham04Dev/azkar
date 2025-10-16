@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '/rootProvider/audio_provider.dart';
 import 'package:new_azkar/models/PrimaryContainer.dart';
+import 'package:provider/provider.dart';
+
+import '/rootProvider/audio_provider.dart';
 
 class ExpandingAudioButton extends StatefulWidget {
   const ExpandingAudioButton({super.key});
@@ -12,7 +13,7 @@ class ExpandingAudioButton extends StatefulWidget {
 
 class _ExpandingAudioButtonState extends State<ExpandingAudioButton>
     with SingleTickerProviderStateMixin {
-  bool isExpanded = false;
+  // bool isExpanded = false;
   late AnimationController _controller;
   late Animation<double> _widthAnimation;
 
@@ -22,25 +23,26 @@ class _ExpandingAudioButtonState extends State<ExpandingAudioButton>
     _controller =
         AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
   }
+setWidthAnimation(){
 
+}
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final screenWidth = MediaQuery.sizeOf(context).width;
-    _widthAnimation = Tween<double>(begin: 56, end: screenWidth - 35)
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _widthAnimation = Tween<double>(begin: 56, end: MediaQuery.sizeOf(context).width - 35)
+        .animate(CurvedAnimation(parent: _controller!, curve: Curves.easeInOut));
   }
 
   void toggleExpand(AudioProvider audio) {
-    setState(() {
+    // setState(() {
       audio.toggle();
-      isExpanded = !isExpanded;
-      if (isExpanded) {
+      // audio.isExpanded = !audio.isExpanded;
+      if (audio.isExpanded) {
         _controller.forward();
       } else {
         _controller.reverse();
       }
-    });
+    // });
   }
 
   @override
@@ -56,42 +58,49 @@ class _ExpandingAudioButtonState extends State<ExpandingAudioButton>
             opacity: 0.5,
             margin: 0,
             padding: 0,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(30),
-              onTap: () => toggleExpand(audio),
-              child: SizedBox(
-                height: 56,
-                width: _widthAnimation.value,
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: isExpanded && _controller.isCompleted
-                        ? [
-                      IconButton(
-                        icon: const Icon(Icons.skip_previous, color: Colors.white, size: 30),
-                        onPressed: audio.prev,
+            child: SizedBox(
+              height: 56,
+              width: _widthAnimation.value,
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: audio.isExpanded && _controller.isCompleted
+                      ? [
+                    IconButton(
+                      icon: const Icon(Icons.skip_previous, color: Colors.white, size: 30),
+                      onPressed: audio.prev,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        // audio.isPlaying ? Icons.pause : Icons.play_arrow,
+                        Icons.pause,
+                        color: Colors.white,
+                        size: 35,
                       ),
-                      IconButton(
-                        icon: Icon(
-                          // audio.isPlaying ? Icons.pause : Icons.play_arrow,
-                          Icons.pause,
-                          color: Colors.white,
-                          size: 35,
-                        ),
+                      onPressed: (){
+                        // audio.toggleExpand();
+                        toggleExpand(audio);
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.skip_next, color: Colors.white, size: 30),
+                      onPressed: (){
+                        // if(audio.currentIndex == audio.tracks.length-1)
+                        audio.next();
+                      }
+                    ),
+                  ]
+                      :  [
+                    IconButton(
+                        icon: const Icon(Icons.play_arrow, color: Colors.white, size: 30),
                         onPressed: (){
-                          toggleExpand(audio);
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.skip_next, color: Colors.white, size: 30),
-                        onPressed: audio.next,
-                      ),
-                    ]
-                        : const [
-                      Icon(Icons.play_arrow, color: Colors.white, size: 30),
-                    ],
-                  ),
+                          // toggleExpand(audio);
+                        toggleExpand(audio);
+                        }
+                    )
+
+                  ],
                 ),
               ),
             ),
