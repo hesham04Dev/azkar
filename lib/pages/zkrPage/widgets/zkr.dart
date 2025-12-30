@@ -39,7 +39,7 @@ class _ZkrState extends State<ZkrContainer> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("${widget.zkr["name"]}"),
+            // Text("${widget.zkr["name"]}"),
             Text(
               "${widget.index + 1}. ${widget.zkr['content']}",
               textAlign: TextAlign.justify,
@@ -48,6 +48,7 @@ class _ZkrState extends State<ZkrContainer> {
                   .bodyLarge
                   ?.copyWith(
                 height: 1.5,
+                fontSize:20,
                 fontFamily: 'Amiri',
               ),
             ),

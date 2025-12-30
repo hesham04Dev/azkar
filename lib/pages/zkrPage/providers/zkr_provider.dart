@@ -56,8 +56,13 @@ class ZkrProvider with ChangeNotifier {
   }
 
   onZkrRepeat({int? index,bool notify = true}) {
-    _azkars[index ?? currentIndex]["repeat"]--;
-    if(notify) notifyListeners();
+
+    if(_azkars[index ?? currentIndex]["repeat"]>0){
+      _azkars[index ?? currentIndex]["repeat"]--;
+      if(notify) notifyListeners();
+    }
+
+
   }
 
   double getHeightToCurrentIndex() {

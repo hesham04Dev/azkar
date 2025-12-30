@@ -196,8 +196,9 @@ class MyAudioHandler extends BaseAudioHandler
 
     } else {
       // End of playlist
-      // await stop();
-      currentIndex =0;
+      await stop();
+      currentIndex =-1;
+      return;
     }
     await setSource();
     await play();
